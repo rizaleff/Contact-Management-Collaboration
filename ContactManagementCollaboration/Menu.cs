@@ -32,5 +32,24 @@ namespace ContactManagementCollaboration
             Console.WriteLine("-----------------------------------------------");
             Console.WriteLine();
         }
+
+        public static void DisplaySearchResults(List<Contact> foundUsers)
+        {
+            if (foundUsers.Count > 0)
+            {
+                Console.WriteLine("Hasil Pencarian:");
+                foreach (var contact in foundUsers)
+                {
+                    Console.WriteLine($"Name: {contact.Name}");
+                    Console.WriteLine($"Username: {contact.PhoneNumber}");
+                    Console.WriteLine($"Password: {contact.EmailAddrress}");
+                    Console.WriteLine("-----------------------------------------------");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Pengguna tidak ditemukan.");
+            }
+        }
     }
 }
