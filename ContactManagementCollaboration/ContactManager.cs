@@ -72,8 +72,6 @@ namespace ContactManagementCollaboration
 
         public void UpdateContact(int id, string name, string phoneNumber, string emailAddress)
         {
-            if(id < Contacts.Count)
-            {
                 if (phoneNumber.Length >= 3)
                 {
                     if (IsValidEmailAddress(emailAddress))
@@ -91,17 +89,11 @@ namespace ContactManagementCollaboration
                 {
                     Console.WriteLine("Phone Number Tidak Valid!");
                 }
-            }
-            else
-            {
-                Console.WriteLine("Id Kontak Tidak Ditemukan!");
-            }
+            
+
         }
 
-        public Contact GetUserById(int id)
-        {
-            
-        }
+
         private bool IsValidEmailAddress(string email)
         {
             return System.Text.RegularExpressions.Regex.IsMatch(email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
