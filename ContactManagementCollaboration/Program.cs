@@ -71,7 +71,7 @@ namespace ContactManagementCollaboration
                             string newPhone = Console.ReadLine();
                             Console.Write("Email ");
                             string newEmail = Console.ReadLine();
-                            contactManager.updateContact(id, newName, newPhone, newEmail);
+                            contactManager.UpdateContact(id, newName, newPhone, newEmail);
                         }
                         else
                         {
@@ -100,10 +100,7 @@ namespace ContactManagementCollaboration
                 {
                     Menu.DisplayMainMenu();
                 }
-                else
-                {
-                    Console.WriteLine("Pilihan tidak valid!");
-                }
+              
             
             else if (choice == 3)
             {
