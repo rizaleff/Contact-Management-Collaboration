@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContactManagementCollaboration
 {
-    internal class ContactManager
+    public class ContactManager
     {
         private List<Contact> contacts = new List<Contact>();
 
