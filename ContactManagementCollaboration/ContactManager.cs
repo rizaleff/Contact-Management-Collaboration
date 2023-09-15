@@ -9,11 +9,13 @@ namespace ContactManagementCollaboration
     internal class ContactManager
     {
         public List<Contact> Contacts { get; private set; }
-            
+        public Stack<Contact> DeletedContacts {  get; private set; }    
 
         public ContactManager() 
         { 
             Contacts = new List<Contact>();
+            Contacts.Add(new Contact("Rizal", "0812312123", "rizal@gmail.com"));
+            Contacts.Add(new Contact("Nanda", "0814566121", "nanda@gmail.com"));
         }
         public void CreateContact(string name, string phoneNumber, string emailAddress)
         {
@@ -38,10 +40,32 @@ namespace ContactManagementCollaboration
 
         public void SearchContact(string inputSearch)
         {
-
+            bool isExists = (Contacts.Any(x => x.Name.Contains(inputSearch, StringComparison.OrdinalIgnoreCase)) 
+                        || Contacts.Any(x => x.PhoneNumber.Contains(inputSearch, StringComparison.OrdinalIgnoreCase))
+                        || Contacts.Any(x => x.EmailAddrress.Contains(inputSearch, StringComparison.OrdinalIgnoreCase)));
+            
         }
 
-        public void ViewContact()
+        public void DeleteContact(int id) 
+        {
+            if(id < Contacts.Count)
+            {
+                DeletedContacts.Push(Contacts[id-1]);
+                Contacts.RemoveAt(id-1);
+                Console.WriteLine("Data Berhasil Dihapus");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Id kontak tidak ditemukan!");
+            }
+        }
+
+        public void UpdateContact(int id)
+        {
+
+        }
+/*        public void ViewContact()
         {
             Console.WriteLine("===========Contact List===========");
             foreach (Contact contact in Contacts)
@@ -51,7 +75,7 @@ namespace ContactManagementCollaboration
                 Console.WriteLine($"Phone Number    : {contact.PhoneNumber}");
                 Console.WriteLine($"Email Address   : {contact.EmailAddrress}");
             }
-        }
+        }*/
 
 
         private bool IsValidEmailAddress(string email)
