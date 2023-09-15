@@ -8,15 +8,22 @@ namespace ContactManagementCollaboration
 {
     internal class ContactManager
     {
-        private List<Contact> contacts = new List<Contact>();
+        public List<Contact> Contacts { get; private set; }
+            
 
+        public ContactManager() 
+        { 
+            Contacts = new List<Contact>();
+        }
         public void CreateContact(string name, string phoneNumber, string emailAddress)
         {
             if (IsValidPhoneNumber(phoneNumber))
             {
                 if (IsValidEmailAddress(emailAddress))
                 {
-                    Contact contact = new Contact(name, phoneNumber, emailAddress); 
+                    Contact contact = new Contact(name, phoneNumber, emailAddress);
+                    Contacts.Add(contact);
+                    
                 }
                 else
                 {
@@ -28,6 +35,24 @@ namespace ContactManagementCollaboration
                 Console.WriteLine("Phone Number Tidak Valid!");
             }
         }
+
+        public void SearchContact(string inputSearch)
+        {
+
+        }
+
+        public void ViewContact()
+        {
+            Console.WriteLine("===========Contact List===========");
+            foreach (Contact contact in Contacts)
+            {
+                
+                Console.WriteLine($"Nama            : {contact.Name}");
+                Console.WriteLine($"Phone Number    : {contact.PhoneNumber}");
+                Console.WriteLine($"Email Address   : {contact.EmailAddrress}");
+            }
+        }
+
 
         private bool IsValidEmailAddress(string email)
         {
