@@ -35,7 +35,7 @@ namespace ContactManagementCollaboration
                 {
 
                     List<Contact> allContact = contactManager.Contacts;
-                    int id = 1;
+                    int lid = 1;
                     foreach (Contact contact in allContact)
                     {
                         Console.WriteLine();
@@ -45,8 +45,9 @@ namespace ContactManagementCollaboration
                         Console.WriteLine($"Phone Number: {contact.PhoneNumber}");
                         Console.WriteLine($"Email Address: {contact.EmailAddrress}");
                         Console.WriteLine("-----------------------------------------------");
-                        id++;
-                    } }
+                        lid++;
+                    }
+                
 
                 Menu.DisplayContactMenu();
                 Console.Write("Pilihan : ");
@@ -106,92 +107,11 @@ namespace ContactManagementCollaboration
             {
                 Console.Write("Masukkan nama pengguna yang ingin Anda cari: ");
                 string searchName = Console.ReadLine();
-                List<User> foundUsers = userManager.GetUsers().Where(user =>
-                    user.FirstName.Contains(searchName, StringComparison.OrdinalIgnoreCase) ||
-                    user.LastName.Contains(searchName, StringComparison.OrdinalIgnoreCase)
-                ).ToList();
-
+                        List<Contact> foundUsers = SearchContact(searchName);
                 Menu.DisplaySearchResults(foundUsers);
             }
+           
             else if (choice == 4)
-            {
-                Console.Write("Username: ");
-                string lUsername = Console.ReadLine();
-                Console.Write("Password: ");
-                string lPassword = Console.ReadLine();
-
-                User loggedInUser = userManager.GetUsers().FirstOrDefault(user =>
-                    user.UserName.Equals(lUsername, StringComparison.OrdinalIgnoreCase) &&
-                    user.Password.Equals(lPassword)
-                );
-
-                if (loggedInUser != null)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("-----------------------------------------------");
-                    Console.WriteLine();
-                    Console.WriteLine("Login Sebagai : " + lUsername);
-                    Console.WriteLine();
-                    while (true)
-                    {
-                        Menu.DisplayUserMenu();
-                        Console.Write("Pilihan : ");
-                        int userChoice;
-                        if (!int.TryParse(Console.ReadLine(), out userChoice))
-                        {
-                            Console.WriteLine("Pilihan tidak valid!");
-                            continue;
-                        }
-
-                        if (userChoice == 1)
-                        {
-                            Console.Write("Masukkan Bilangan yang ingin di cek : ");
-                            int num;
-                            if (!int.TryParse(Console.ReadLine(), out num))
-                            {
-                                Console.WriteLine("Input tidak valid!");
-                                continue;
-                            }
-
-                            string result = GanjilGenap.EvenOddCheck(num);
-                            Console.WriteLine(result);
-                        }
-                        else if (userChoice == 2)
-                        {
-                            Console.Write("Pilih (Ganjil/Genap) : ");
-                            string choice2 = Console.ReadLine();
-                            Console.Write("Masukkan limit : ");
-                            int limit;
-                            if (!int.TryParse(Console.ReadLine(), out limit))
-                            {
-                                Console.WriteLine("Limit tidak valid!");
-                                continue;
-                            }
-
-                            if (choice2 != "Genap" && choice2 != "Ganjil")
-                            {
-                                Console.WriteLine("Input pilihan tidak valid!!!");
-                                continue;
-                            }
-
-                            GanjilGenap.PrintEvenOdd(limit, choice2);
-                        }
-                        else if (userChoice == 3)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Pilihan tidak valid!");
-                        }
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Login gagal. Username atau password salah.");
-                }
-            }
-            else if (choice == 5)
             {
                 break;
             }
