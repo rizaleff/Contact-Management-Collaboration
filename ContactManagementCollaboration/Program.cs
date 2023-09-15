@@ -41,12 +41,12 @@ namespace ContactManagementCollaboration
                         Console.WriteLine();
                         Console.WriteLine("-----------------------------------------------");
                         Console.WriteLine($"ID: {lid}");
-                        Console.WriteLine($"Name: {contact.Name}");
-                        Console.WriteLine($"Phone Number: {contact.PhoneNumber}");
-                        Console.WriteLine($"Email Address: {contact.EmailAddrress}");
+                        contact.GetContactData(contact);
                         Console.WriteLine("-----------------------------------------------");
                         lid++;
                     }
+
+
 
 
                     Menu.DisplayContactMenu();
@@ -63,7 +63,7 @@ namespace ContactManagementCollaboration
                         Console.Write("Masukkan ID kontak yang ingin diedit: ");
                         if (int.TryParse(Console.ReadLine(), out int id))
                         {
-                            /* Contact contactToEdit = contactManager.GetContactById(id);*/
+
                             if (id > 0 && id <= contactManager.Contacts.Count)
                             {
                                 Console.Write("Name : ");
@@ -91,6 +91,8 @@ namespace ContactManagementCollaboration
                         if (int.TryParse(Console.ReadLine(), out int id))
                         {
                             contactManager.DeleteContact(id);
+                           
+                            
                         }
                         else
                         {
@@ -110,11 +112,12 @@ namespace ContactManagementCollaboration
 
                 else if (choice == 3)
                 {
-                    Console.Write("Masukkan nama Kontak yang ingin Anda cari: ");
+                    Console.Write("Masukkan nama pengguna yang ingin Anda cari: ");
                     string searchName = Console.ReadLine();
                     List<Contact> foundContacts = contactManager.SearchContact(searchName);
                     Menu.DisplaySearchResults(foundContacts);
                 }
+
 
                 else if (choice == 4)
                 {

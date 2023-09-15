@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,13 +51,25 @@ namespace ContactManagementCollaboration
 
         public void DeleteContact(int id)
         {
-            if (id < Contacts.Count)
+            if (id < Contacts.Count + 1)
             {
-                Console.WriteLine(Contacts[id - 1].Name);
+
                 DeletedContacts.Push(Contacts[id - 1]);
                 Contacts.RemoveAt(id - 1);
-                Console.WriteLine("Data Berhasil Dihapus");
-                Console.ReadLine();
+                Console.WriteLine("Data Berhasil Dihapus\n");
+                Console.WriteLine("-----------------------------------------------");
+                Console.WriteLine("------------History Kontak Terhapus------------");
+                Stack<Contact> contactDeleted = DeletedContacts;
+                int deletedId = 1;
+                foreach (Contact contact in contactDeleted)
+                {
+                    Console.WriteLine("-----------------------------------------------");
+                    Console.WriteLine($"ID: {deletedId}");
+                    contact.GetContactData(contact);
+                    Console.WriteLine("-----------------------------------------------");
+                    deletedId++;
+                }
+                    Console.ReadLine();
             }
             else
             {
