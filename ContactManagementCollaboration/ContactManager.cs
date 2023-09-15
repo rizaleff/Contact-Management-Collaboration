@@ -20,7 +20,7 @@ namespace ContactManagementCollaboration
         }
         public void CreateContact(string name, string phoneNumber, string emailAddress)
         {
-            if (phoneNumber.Length >= 3)
+            if (IsValidPhoneNumber(phoneNumber))
             {
                 if (IsValidEmailAddress(emailAddress))
                 {
@@ -43,8 +43,8 @@ namespace ContactManagementCollaboration
         {
             List<Contact> foundContact = Contacts.Where(contact => contact.Name.Contains(inputSearch, StringComparison.OrdinalIgnoreCase)
                                                        || contact.PhoneNumber.Contains(inputSearch, StringComparison.OrdinalIgnoreCase)
-                                                       || contact.EmailAddrress.Contains(inputSearch, StringComparison.OrdinalIgnoreCase)).ToList() ;
-                                        
+                                                       || contact.EmailAddrress.Contains(inputSearch, StringComparison.OrdinalIgnoreCase)).ToList();
+
             return foundContact;
         }
 
@@ -66,24 +66,23 @@ namespace ContactManagementCollaboration
 
         public void UpdateContact(int id, string name, string phoneNumber, string emailAddress)
         {
-                if (phoneNumber.Length >= 3)
+            if (phoneNumber.Length >= 3)
+            {
+                if (IsValidEmailAddress(emailAddress))
                 {
-                    if (IsValidEmailAddress(emailAddress))
-                    {
-                        Contacts[id-1].Name = name;
-                        Contacts[id - 1].PhoneNumber = phoneNumber;
-                        Contacts[id - 1].EmailAddrress = emailAddress;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Format Email Address Tidak Valid!");
-                    }
+                    Contacts[id - 1].Name = name;
+                    Contacts[id - 1].PhoneNumber = phoneNumber;
+                    Contacts[id - 1].EmailAddrress = emailAddress;
                 }
                 else
                 {
-                    Console.WriteLine("Phone Number Tidak Valid!");
+                    Console.WriteLine("Format Email Address Tidak Valid!");
                 }
-            
+            }
+            else
+            {
+                Console.WriteLine("Phone Number Tidak Valid!");
+            }
 
         }
 
@@ -92,5 +91,10 @@ namespace ContactManagementCollaboration
         {
             return System.Text.RegularExpressions.Regex.IsMatch(email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
         }
+        private bool IsValidPhoneNumber(string phoneNumber)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(phoneNumber, @"^\d{3,}$");
+        }
     }
+
 }
