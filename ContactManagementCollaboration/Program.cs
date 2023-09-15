@@ -46,9 +46,9 @@ namespace ContactManagementCollaboration
                         Console.WriteLine($"Email Address: {contact.EmailAddrress}");
                         Console.WriteLine("-----------------------------------------------");
                         id++;
-                    } } 
+                    } }
 
-                /*Menu.DisplayContactMenu();
+                Menu.DisplayContactMenu();
                 Console.Write("Pilihan : ");
                 int editChoice;
                 if (!int.TryParse(Console.ReadLine(), out editChoice))
@@ -60,18 +60,18 @@ namespace ContactManagementCollaboration
                 if (editChoice == 1)
                 {
                     Console.Write("Masukkan ID pengguna yang ingin diedit: ");
-                    if (int.TryParse(Console.ReadLine(), out int editUserId))
+                    if (int.TryParse(Console.ReadLine(), out int id))
                     {
-                        User userToEdit = userManager.GetUserById(editUserId);
-                        if (userToEdit != null)
+                        /* Contact contactToEdit = contactManager.GetContactById(id);*/
+                        if (id > 0 && id <= contactManager.Contacts.Count)
                         {
-                            Console.Write("First Name : ");
-                            string newFirstName = Console.ReadLine();
-                            Console.Write("Last Name : ");
-                            string newLastName = Console.ReadLine();
-                            Console.Write("Password: ");
-                            string newPassword = Console.ReadLine();
-                            userManager.EditUser(editUserId, newFirstName, newLastName, newPassword);
+                            Console.Write("Name : ");
+                            string newName = Console.ReadLine();
+                            Console.Write("Phone Number : ");
+                            string newPhone = Console.ReadLine();
+                            Console.Write("Email ");
+                            string newEmail = Console.ReadLine();
+                            contactManager.updateContact(id, newName, newPhone, newEmail);
                         }
                         else
                         {
@@ -87,9 +87,9 @@ namespace ContactManagementCollaboration
                 else if (editChoice == 2)
                 {
                     Console.Write("Masukkan ID pengguna yang ingin dihapus: ");
-                    if (int.TryParse(Console.ReadLine(), out int deleteUserId))
+                    if (int.TryParse(Console.ReadLine(), out int id))
                     {
-                        userManager.DeleteUser(deleteUserId);
+                        contactManager.DeleteContact(id);
                     }
                     else
                     {
@@ -104,7 +104,7 @@ namespace ContactManagementCollaboration
                 {
                     Console.WriteLine("Pilihan tidak valid!");
                 }
-            }
+            
             else if (choice == 3)
             {
                 Console.Write("Masukkan nama pengguna yang ingin Anda cari: ");
@@ -197,13 +197,13 @@ namespace ContactManagementCollaboration
             else if (choice == 5)
             {
                 break;
-            }*/
-                else
-                {
-                    Console.WriteLine("Pilihan tidak valid!");
-                }
-                }
             }
+            else
+            {
+                Console.WriteLine("Pilihan tidak valid!");
+            }
+        }
+    } }
         }
     } 
 
