@@ -40,87 +40,93 @@ namespace ContactManagementCollaboration
                     {
                         Console.WriteLine();
                         Console.WriteLine("-----------------------------------------------");
-                        Console.WriteLine($"ID: {id}");
+                        Console.WriteLine($"ID: {lid}");
                         Console.WriteLine($"Name: {contact.Name}");
                         Console.WriteLine($"Phone Number: {contact.PhoneNumber}");
                         Console.WriteLine($"Email Address: {contact.EmailAddrress}");
                         Console.WriteLine("-----------------------------------------------");
                         lid++;
                     }
-                
 
-                Menu.DisplayContactMenu();
-                Console.Write("Pilihan : ");
-                int editChoice;
-                if (!int.TryParse(Console.ReadLine(), out editChoice))
-                {
-                    Console.WriteLine("Pilihan tidak valid!");
-                    continue;
-                }
 
-                if (editChoice == 1)
-                {
-                    Console.Write("Masukkan ID pengguna yang ingin diedit: ");
-                    if (int.TryParse(Console.ReadLine(), out int id))
+                    Menu.DisplayContactMenu();
+                    Console.Write("Pilihan : ");
+                    int editChoice;
+                    if (!int.TryParse(Console.ReadLine(), out editChoice))
                     {
-                        /* Contact contactToEdit = contactManager.GetContactById(id);*/
-                        if (id > 0 && id <= contactManager.Contacts.Count)
+                        Console.WriteLine("Pilihan tidak valid!");
+                        continue;
+                    }
+
+                    if (editChoice == 1)
+                    {
+                        Console.Write("Masukkan ID kontak yang ingin diedit: ");
+                        if (int.TryParse(Console.ReadLine(), out int id))
                         {
-                            Console.Write("Name : ");
-                            string newName = Console.ReadLine();
-                            Console.Write("Phone Number : ");
-                            string newPhone = Console.ReadLine();
-                            Console.Write("Email ");
-                            string newEmail = Console.ReadLine();
-                            contactManager.UpdateContact(id, newName, newPhone, newEmail);
+                            /* Contact contactToEdit = contactManager.GetContactById(id);*/
+                            if (id > 0 && id <= contactManager.Contacts.Count)
+                            {
+                                Console.Write("Name : ");
+                                string newName = Console.ReadLine();
+                                Console.Write("Phone Number : ");
+                                string newPhone = Console.ReadLine();
+                                Console.Write("Email ");
+                                string newEmail = Console.ReadLine();
+                                contactManager.UpdateContact(id, newName, newPhone, newEmail);
+                            }
+                            else
+                            {
+                                Console.WriteLine("ID kontak tidak valid!");
+                                Console.WriteLine();
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("ID pengguna tidak valid!");
-                            Console.WriteLine();
+                            Console.WriteLine("ID kontak tidak valid!");
                         }
                     }
+                    else if (editChoice == 2)
+                    {
+                        Console.Write("Masukkan ID kontak yang ingin dihapus: ");
+                        if (int.TryParse(Console.ReadLine(), out int id))
+                        {
+                            contactManager.DeleteContact(id);
+                        }
+                        else
+                        {
+                            Console.WriteLine("ID kontak tidak valid!");
+                        }
+                    }
+                    else if (editChoice == 3)
+                    {
+                        Menu.DisplayMainMenu();
+                    }
                     else
                     {
-                        Console.WriteLine("ID pengguna tidak valid!");
+                        Console.WriteLine("Pilihan tidak valid!");
                     }
                 }
-                else if (editChoice == 2)
+
+
+                else if (choice == 3)
                 {
-                    Console.Write("Masukkan ID pengguna yang ingin dihapus: ");
-                    if (int.TryParse(Console.ReadLine(), out int id))
-                    {
-                        contactManager.DeleteContact(id);
-                    }
-                    else
-                    {
-                        Console.WriteLine("ID pengguna tidak valid!");
-                    }
+                    Console.Write("Masukkan nama Kontak yang ingin Anda cari: ");
+                    string searchName = Console.ReadLine();
+                    List<Contact> foundContacts = contactManager.SearchContact(searchName);
+                    Menu.DisplaySearchResults(foundContacts);
                 }
-                else if (editChoice == 3)
+
+                else if (choice == 4)
                 {
-                    Menu.DisplayMainMenu();
+                    break;
                 }
-              
-            
-            else if (choice == 3)
-            {
-                Console.Write("Masukkan nama pengguna yang ingin Anda cari: ");
-                string searchName = Console.ReadLine();
-                        List<Contact> foundUsers = SearchContact(searchName);
-                Menu.DisplaySearchResults(foundUsers);
-            }
-           
-            else if (choice == 4)
-            {
-                break;
-            }
-            else
-            {
-                Console.WriteLine("Pilihan tidak valid!");
+                else
+                {
+                    Console.WriteLine("Pilihan tidak valid!");
+                }
             }
         }
-    } }
-        }
-    } 
+    }
+}
+
 

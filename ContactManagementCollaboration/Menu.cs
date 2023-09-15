@@ -28,21 +28,21 @@ namespace ContactManagementCollaboration
             Console.WriteLine("-----------------------------------------------");
             Console.WriteLine("1. Edit Contact");
             Console.WriteLine("2. Delete Contact");
-            Console.WriteLine("4. Exit");
+            Console.WriteLine("3. Exit");
             Console.WriteLine("-----------------------------------------------");
             Console.WriteLine();
         }
 
-        public static void DisplaySearchResults(List<Contact> foundUsers)
+        public static void DisplaySearchResults(List<Contact> foundContacts)
         {
-            if (foundUsers.Count > 0)
+            if (foundContacts.Count > 0)
             {
                 Console.WriteLine("Hasil Pencarian:");
-                foreach (var contact in foundUsers)
+                foreach (var contact in foundContacts)
                 {
-                    Console.WriteLine($"Name: {contact.Name}");
-                    Console.WriteLine($"Username: {contact.PhoneNumber}");
-                    Console.WriteLine($"Password: {contact.EmailAddrress}");
+                    Console.WriteLine($"Name            : {contact.Name}");
+                    Console.WriteLine($"Phone Number    : {contact.PhoneNumber}");
+                    Console.WriteLine($"Email Address   : {contact.EmailAddrress}");
                     Console.WriteLine("-----------------------------------------------");
                 }
             }

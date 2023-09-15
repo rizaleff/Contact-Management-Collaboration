@@ -14,6 +14,7 @@ namespace ContactManagementCollaboration
         public ContactManager()
         {
             Contacts = new List<Contact>();
+            DeletedContacts = new Stack<Contact>();
             Contacts.Add(new Contact("Rizal", "0812312123", "rizal@gmail.com"));
             Contacts.Add(new Contact("Nanda", "0814566121", "nanda@gmail.com"));
         }
@@ -38,27 +39,20 @@ namespace ContactManagementCollaboration
             }
         }
 
-        public void SearchContact(string inputSearch)
+        public List<Contact> SearchContact(string inputSearch)
         {
-            bool isExists = (Contacts.Any(x => x.Name.Contains(inputSearch, StringComparison.OrdinalIgnoreCase))
-                        || Contacts.Any(x => x.PhoneNumber.Contains(inputSearch, StringComparison.OrdinalIgnoreCase))
-                        || Contacts.Any(x => x.EmailAddrress.Contains(inputSearch, StringComparison.OrdinalIgnoreCase)));
-            /*Console.Write("Masukkan nama pengguna yang ingin Anda cari: ");
-            string searchName = Console.ReadLine();
-            List<User> foundUsers = userManager.GetUsers().Where(user =>
-                user.FirstName.Contains(searchName, StringComparison.OrdinalIgnoreCase) ||
-                user.LastName.Contains(searchName, StringComparison.OrdinalIgnoreCase)
-            ).ToList();
-
-            Menu.DisplaySearchResults(foundUsers);*/
-
-
+            List<Contact> foundContact = Contacts.Where(contact => contact.Name.Contains(inputSearch, StringComparison.OrdinalIgnoreCase)
+                                                       || contact.PhoneNumber.Contains(inputSearch, StringComparison.OrdinalIgnoreCase)
+                                                       || contact.EmailAddrress.Contains(inputSearch, StringComparison.OrdinalIgnoreCase)).ToList() ;
+                                        
+            return foundContact;
         }
 
         public void DeleteContact(int id)
         {
             if (id < Contacts.Count)
             {
+                Console.WriteLine(Contacts[id - 1].Name);
                 DeletedContacts.Push(Contacts[id - 1]);
                 Contacts.RemoveAt(id - 1);
                 Console.WriteLine("Data Berhasil Dihapus");
