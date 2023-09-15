@@ -43,6 +43,15 @@ namespace ContactManagementCollaboration
             bool isExists = (Contacts.Any(x => x.Name.Contains(inputSearch, StringComparison.OrdinalIgnoreCase))
                         || Contacts.Any(x => x.PhoneNumber.Contains(inputSearch, StringComparison.OrdinalIgnoreCase))
                         || Contacts.Any(x => x.EmailAddrress.Contains(inputSearch, StringComparison.OrdinalIgnoreCase)));
+            /*Console.Write("Masukkan nama pengguna yang ingin Anda cari: ");
+            string searchName = Console.ReadLine();
+            List<User> foundUsers = userManager.GetUsers().Where(user =>
+                user.FirstName.Contains(searchName, StringComparison.OrdinalIgnoreCase) ||
+                user.LastName.Contains(searchName, StringComparison.OrdinalIgnoreCase)
+            ).ToList();
+
+            Menu.DisplaySearchResults(foundUsers);*/
+
 
         }
 
@@ -61,31 +70,41 @@ namespace ContactManagementCollaboration
             }
         }
 
-        public void UpdateContact(int id)
+        public void UpdateContact(int id, string name, string phoneNumber, string emailAddress)
         {
-
-        }
-        /*        public void ViewContact()
+            if(id < Contacts.Count)
+            {
+                if (phoneNumber.Length >= 3)
                 {
-                    Console.WriteLine("===========Contact List===========");
-                    foreach (Contact contact in Contacts)
+                    if (IsValidEmailAddress(emailAddress))
                     {
-
-                        Console.WriteLine($"Nama            : {contact.Name}");
-                        Console.WriteLine($"Phone Number    : {contact.PhoneNumber}");
-                        Console.WriteLine($"Email Address   : {contact.EmailAddrress}");
+                        Contacts[id-1].Name = name;
+                        Contacts[id - 1].PhoneNumber = phoneNumber;
+                        Contacts[id - 1].EmailAddrress = emailAddress;
                     }
-                }*/
+                    else
+                    {
+                        Console.WriteLine("Format Email Address Tidak Valid!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Phone Number Tidak Valid!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Id Kontak Tidak Ditemukan!");
+            }
+        }
 
-
+        public Contact GetUserById(int id)
+        {
+            
+        }
         private bool IsValidEmailAddress(string email)
         {
             return System.Text.RegularExpressions.Regex.IsMatch(email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
-        }
-
-        private bool IsValidPhoneNumber(string phoneNumber)
-        {
-            return System.Text.RegularExpressions.Regex.IsMatch(phoneNumber, @"^\d{10}$");
         }
     }
 }
