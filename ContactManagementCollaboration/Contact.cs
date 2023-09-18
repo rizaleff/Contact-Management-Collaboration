@@ -23,9 +23,9 @@ namespace ContactManagementCollaboration
 
         public void GetContactData(Contact contact)
         {
-            Console.WriteLine($"Name: {contact.Name}");
-            Console.WriteLine($"Phone Number: {contact.PhoneNumber}");
-            Console.WriteLine($"Email Address: {contact.EmailAddrress}");
+            Console.WriteLine($"Name            : {contact.Name}");
+            Console.WriteLine($"Phone Number    : {contact.PhoneNumber}");
+            Console.WriteLine($"Email Address   : {contact.EmailAddrress}");
         }
     }
 }

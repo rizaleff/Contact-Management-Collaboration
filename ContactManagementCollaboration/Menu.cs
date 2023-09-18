@@ -40,9 +40,7 @@ namespace ContactManagementCollaboration
                 Console.WriteLine("Hasil Pencarian:");
                 foreach (var contact in foundContacts)
                 {
-                    Console.WriteLine($"Name            : {contact.Name}");
-                    Console.WriteLine($"Phone Number    : {contact.PhoneNumber}");
-                    Console.WriteLine($"Email Address   : {contact.EmailAddrress}");
+                    Console.WriteLine(contact.GetContactData);
                     Console.WriteLine("-----------------------------------------------");
                 }
             }
